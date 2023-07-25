@@ -3,6 +3,7 @@ const fetchData = async (url) => {
     return data.json()
 }
 
+
 const promiseAll = async (array) => {
     const data = await Promise.all(array.map(element => fetchData(element.url)))
     return data

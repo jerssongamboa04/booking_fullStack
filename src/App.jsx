@@ -15,34 +15,34 @@ import Reservation from './Pages/Reservation';
 function App() {
   return (
     <div className="App">
-      <AuthContext>
-        <Header />
-        <Routes>
-          <Route path='/' element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>} />
+        <AuthContext>
+          <Header />
+          <Routes>
+            <Route path='/' element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>} />
 
-          <Route path='/rooms' element={
-            <ProtectedRoute>
-              <Rooms />
-            </ProtectedRoute>} />
+            <Route path='/rooms' element={
+              <ProtectedRoute>
+                <Rooms />
+              </ProtectedRoute>} />
 
-          <Route path='/user' element={
-            <ProtectedRoute>
-              <User />
-            </ProtectedRoute>} />
+            <Route path='/user' element={
+              <ProtectedRoute>
+                <User />
+              </ProtectedRoute>} />
 
-          <Route path='/reservation' element={
-            <ProtectedRoute>
-              <Reservation />
-            </ProtectedRoute>} />
+            <Route path='/reservation' element={
+              <ProtectedRoute>
+                <Reservation />
+              </ProtectedRoute>} />
 
-          <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
-        </Routes>
-        <Footer />
-      </AuthContext>
+            <Route path='/register' element={<Register />} />
+            <Route path='/login' element={<Login />} />
+          </Routes>
+          <Footer />
+        </AuthContext>
     </div>
 
   );

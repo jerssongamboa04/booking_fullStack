@@ -1,22 +1,17 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import CheckMessage from './CheckMessage';
 import { fetchData } from "../Utilies/Utilies";
-import { UserContext } from '../Context/AuthContext';
 
 const CardDescription = ({ room_id, name, images, description, tv, air_conditioning }) => {
 
     const [check, setCheck] = useState();
     const [user_id, setUser_id] = useState('');
-
     const [usersEmail, setUsersEmail] = useState([]);
-
     const [emailUser, setEmailUser] = useState();
 
 
     useEffect(() => {
         const storedEmail = sessionStorage.getItem('emailUser');
-        console.log(storedEmail);
-
         if (storedEmail) {
             setEmailUser(storedEmail.toLowerCase());
         }
@@ -25,22 +20,22 @@ const CardDescription = ({ room_id, name, images, description, tv, air_condition
 
     useEffect(() => {
         const fetchUsers = async () => {
-          try {
-            const usersResponse = await fetchData("http://localhost:8000/users");
-            if (usersResponse && usersResponse.result) {
-              const usersData = usersResponse.result;
-              setUsersEmail(usersData);
-            } else {
-              console.error('Error fetching users:', usersResponse);
+            try {
+                const usersResponse = await fetchData("http://localhost:8000/users");
+                if (usersResponse && usersResponse.result) {
+                    const usersData = usersResponse.result;
+                    setUsersEmail(usersData);
+                } else {
+                    console.error('Error fetching users:', usersResponse);
+                }
+            } catch (error) {
+                console.error('Error fetching users:', error);
             }
-          } catch (error) {
-            console.error('Error fetching users:', error);
-          }
         };
-      
+
         fetchUsers();
-      }, []);
-      
+    }, []);
+
 
 
     useEffect(() => {

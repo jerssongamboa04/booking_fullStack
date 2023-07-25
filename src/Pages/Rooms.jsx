@@ -7,23 +7,20 @@ import CheckMessage from '../Components/CheckMessage';
 
 export const Rooms = () => {
 
-
     const [rooms, setRooms] = useState();
     const [error, setError] = useState();
     const [newRoom, setNewRoom] = useState();
     const [check, setCheck] = useState();
-    const [user_id, setUser_id] = useState();
+    const [user_id] = useState();
 
 
     useEffect(() => {
         const fetchRooms = async () => {
             try {
                 const roomsData = await fetchData('http://localhost:8000/rooms');
-
                 const rooms = roomsData.result;
 
                 setRooms(rooms);
-
 
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -34,12 +31,22 @@ export const Rooms = () => {
     }, []);
 
     const handleChange = (event) => {
-        const { name, value } = event.target;
-        setNewRoom((prevRooms) => ({
+        const { name, value, type, checked } = event.target;
+      
+        // Si el tipo de campo es checkbox, actualiza el estado con el valor booleano en lugar del texto
+        if (type === 'checkbox') {
+          setNewRoom((prevRooms) => ({
+            ...prevRooms,
+            [name]: checked,
+          }));
+        } else {
+          // Si no es un checkbox, actualiza el estado normalmente con el valor del campo de texto
+          setNewRoom((prevRooms) => ({
             ...prevRooms,
             [name]: value,
-        }));
-    };
+          }));
+        }
+      };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -80,7 +87,7 @@ export const Rooms = () => {
 
     return (
         <section className=" flex flex-col items-center justify-center">
-            <h2 className="my-6 [text-shadow:_2px_4px_3px_rgba(0,0,0,0.3)] text-5xl">Rooms</h2>
+            <h2 className="my-6 [text-shadow:_2px_4px_3px_rgba(0,0,0,0.3)] text-5xl font-poppins">Rooms</h2>
             <div className="flex  flex-wrap items-center justify-center ">
                 {rooms &&
                     rooms.map((room, i) => {
@@ -108,24 +115,6 @@ export const Rooms = () => {
                 </div>
 
                 <div className="flex flex-col my-4 text-start focus:outline-none focus:shadow-outline">
-                    <input required placeholder='Whit TV?'
-                        className="border rounded p-2"
-                        type="text"
-                        name="tv"
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <div className="flex flex-col my-4 text-start focus:outline-none focus:shadow-outline">
-                    <input required placeholder='Whit Air Conditioning?'
-                        className="border rounded p-2"
-                        type="text"
-                        name="air"
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <div className="flex flex-col my-4 text-start focus:outline-none focus:shadow-outline">
                     <input required placeholder='description'
                         className="border rounded p-2"
                         type="text"
@@ -141,6 +130,27 @@ export const Rooms = () => {
                         name="images"
                         onChange={handleChange}
                     />
+                </div>
+                <div className='flex justify-around'>
+                    <div className="flex flex-col my-4 text-start focus:outline-none focus:shadow-outline">
+                        <input
+                            type="checkbox"
+                            name="tv"
+                            value="Has TV"
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="tv">Whit TV?</label>
+                    </div>
+
+                    <div className="flex flex-col my-4 text-start focus:outline-none focus:shadow-outline">
+                        <input
+                            type="checkbox"
+                            name="air_conditioning"
+                            value="Has Air Conditioning"
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="air_conditioning">Whit Air Conditioning?</label>
+                    </div>
                 </div>
 
                 <div className="flex justify-center items-center flex-col">

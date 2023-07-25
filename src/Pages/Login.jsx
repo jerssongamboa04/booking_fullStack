@@ -1,5 +1,5 @@
 import Button from '../Components/Button';
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { UserContext } from '../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import Alert from '../Components/Alert';
@@ -7,7 +7,7 @@ import googleLogo from '../Static/google.png';
 
 const Login = () => {
 
-    const { emailUser, setEmailUser } = useContext(UserContext);
+    const {setEmailUser } = useContext(UserContext);
     const { user, setUser, login, loginWhitGoogle } = useContext(UserContext);
     const [error, setError] = useState();
 
@@ -24,7 +24,7 @@ const Login = () => {
             await login(user.email, user.password);
             setEmailUser(user.email);
             sessionStorage.setItem('emailUser', user.email); // Guardar en sessionStorage
-            navigate('/rooms');
+            navigate('/');
         } catch (error) {
             setError(error.message);
             console.log(error);
@@ -34,7 +34,7 @@ const Login = () => {
     const handleGoogleSignin = async () => {
         try {
             await loginWhitGoogle();
-            navigate("/rooms");
+            navigate("/");
 
         } catch (error) {
             setError(error.message);

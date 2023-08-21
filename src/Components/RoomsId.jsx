@@ -1,48 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
-import CheckMessage from './CheckMessage';
 import { fetchData } from '../Utilies/Utilies';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../Context/AuthContext';
 
 
 const RoomsId = () => {
-    const [user_id, setUser_id] = useState();
+    const { user_id} = useContext(UserContext);
     const [reservationsId, setReservationsId] = useState([]);
-    const [emailLocal, setEmailLocal] = useState('');
-    const [usersEmail, setUsersEmail] = useState([]);
-
-    useEffect(() => {
-        const storedEmail = sessionStorage.getItem('emailUser');
-        if (storedEmail) {
-            setEmailLocal(storedEmail.toLowerCase());
-        }
-    }, []);
-
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const usersResponse = await fetchData("http://localhost:8000/users");
-                if (usersResponse && usersResponse.result) {
-                    const usersData = usersResponse.result;
-                    setUsersEmail(usersData);
-                } else {
-                    console.error('Error fetching users:', usersResponse);
-                }
-            } catch (error) {
-                console.error('Error fetching users:', error);
-            }
-        };
-
-        fetchUsers();
-    }, []);
-
-    useEffect(() => {
-        const compareEmail = emailLocal && usersEmail.find((user) => user.email === emailLocal);
-
-        if (compareEmail) {
-            setUser_id(compareEmail.user_id);
-        }
-    }, [emailLocal, usersEmail]);
-
+   
     useEffect(() => {
         const fetchRooms = async () => {
             try {
@@ -70,11 +35,35 @@ const RoomsId = () => {
         const year = date.getFullYear();
         const hours = date.getHours();
         const minutes = date.getMinutes();
-        return `Dia reserva ${day}/${month}/${year} Hora: ${hours}:${minutes}`;
+        return `Dia de reserva: ${day}/${month}/${year} Hora: ${hours}:${minutes}`;
     };
 
+
+    // FUNCION DELETE RESERVATION
+
+    const deleteReservation = async (reservation_id) => {
+        console.log(reservation_id);
+        try {
+            const response = await fetchData(`http://localhost:8000/reservations/delete/${reservation_id}`, {
+                method: 'DELETE',
+            });
+
+            if (response) {
+                setReservationsId(prevReservations => prevReservations.filter(reservation => reservation.reservation_id !== reservation_id));
+                console.log("Delete reservation");
+            } else {
+                console.error('Error delete reservation', response);
+            }
+        } catch (error) {
+            console.error('Error delete reservation:', error);
+        }
+    };
+
+
+
+
     return (
-        <section>
+        <section className='mb-20'>
             <hr className="border-gray-300 my-4 w-full" />
             {reservationsId.length === 0 ? (
                 <div className='p-4'>No Tienes Reservas, <Link to='/rooms'><button className='text-blue-900 font-bold p-1 hover:text-black hover:bg-blue-500 hover:rounded-lg hover:p-1
@@ -87,17 +76,21 @@ const RoomsId = () => {
                     <div className="flex flex-wrap items-center justify-center">
 
                         {reservationsId.map((reservation, i) => {
-                            const formattedStartDate = formatDate(reservation.time_start);
-                            const formattedEndDate = formatDate(reservation.time_end);
+                            const formattedStartDate = formatDate(reservation.reservation_day);
 
                             return (
-                                <div key={i} className="bg-red-200 text-center p-6 rounded-lg m-5 border-solid border-[1px] border-[#e3ded7] shadow-[rgba(0,0,0,0.1)0_4px_12px] transition ease-in-out delay-250 hover:shadow-[rgba(0,0,0,0.35)_0_5px_15px] hover:bg-[#e4dfd8]">
-                                    <h1>{reservation.reservation_id}</h1>
-                                    <h2>{reservation.user_id}</h2>
-                                    <h2>{reservation.room_id}</h2>
-                                    <h2>{formattedStartDate}</h2>
-                                    <h2>{formattedEndDate}</h2>
-                                    <button className="m-2 border rounded px-12 py-2 hover:bg-[#003B95] hover:scale-105 transition ease-in-out delay-250 bg-[#006CE6] text-white" >
+                                <div key={i} className=" text-center p-6 rounded-lg m-5 border-solid border-[1px] border-[#e3ded7] shadow-[rgba(0,0,0,0.1)0_4px_12px] transition ease-in-out delay-250 hover:shadow-[rgba(0,0,0,0.35)_0_5px_15px] hover:bg-slate-100">
+                                    <h2 className='font-semibold'>Nº RESERVATION: </h2>
+                                    <h2 className="font-semibold w-full border-b-2 border-neutral-200 border-opacity-100 px-6 py-3 dark:border-opacity-50">{reservation.reservation_id}</h2>
+                                    <h2 className="font-semibold w-full border-b-2 border-neutral-200 border-opacity-100 px-6 py-3 dark:border-opacity-50">USER: {reservation.user_id}</h2>
+                                    <h2 className=" font-semibold w-full border-b-2 border-neutral-200 border-opacity-100 px-6 py-3 dark:border-opacity-50">ROOM: {reservation.room_id}</h2>
+                                    <div className=" font-semibold w-full border-b-2 border-neutral-200 border-opacity-100 px-6 py-3 dark:border-opacity-50">
+                                        <h2>START DATE: {reservation.time_start}</h2>
+                                        <h2>END DATE: {reservation.time_end}</h2>
+                                    </div>
+                                    <h2 className="w-full border-b-2 border-neutral-200 border-opacity-200 px-6 py-3 dark:border-opacity-50">{formattedStartDate}</h2>
+
+                                    <button onClick={() => deleteReservation(reservation.reservation_id)} className="m-2 border rounded px-12 py-2 hover:bg-[#003B95] hover:scale-105 transition ease-in-out delay-250 bg-[#006CE6] text-white" >
                                         DELETE
                                     </button>
                                 </div>
@@ -106,7 +99,6 @@ const RoomsId = () => {
                     </div>
                 </div>
             )}
-            <hr className="border-gray-300 my-4 w-full" />
         </section>
     );
 };

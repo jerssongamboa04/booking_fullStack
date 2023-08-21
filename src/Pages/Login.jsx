@@ -42,11 +42,11 @@ const Login = () => {
     }
 
     return (
-        <div className="flex justify-center items-center flex-col m-12 ">
+        <div className="min-h-screen flex justify-center items-center flex-col  ">
             {error && <Alert message={error} />}
             <form onSubmit={handleSubmit} className="bg-white flex flex-col border rounded-2xl px-20 py-10 shadow-[rgba(0,0,0,0.1)0_4px_12px]">
 
-                <h1 className="font-bold text-4xl p-4">LOGIN</h1>
+                <h1 className="font-bold text-4xl p-4 m-0">LOGIN</h1>
 
                 <div className="flex flex-col my-[0.8rem] mx-[0.4rem] text-start gap-2">
                     <input required placeholder='Email'
@@ -66,7 +66,7 @@ const Login = () => {
                     />
                 </div>
                 <div className="flex justify-center items-center flex-col">
-                    <button className="m-4 text-white mb-2 bg-[#006CE6] border rounded px-12 py-2 hover:bg-[#003B95]" type="submit">Login</button>
+                    <button className="m-4 text-white mb-2 bg-black border rounded px-12 py-2 hover:bg-[#003B95]" type="submit">Login</button>
                     <hr className="border-gray-300 my-4 w-full" />
                     <button className='text-white bg-[#1f1815] px-2 border rounded flex text-center' onClick={handleGoogleSignin}><img className='w-8 h-8' src={googleLogo} alt="Google" /></button>
                 </div>

@@ -86,24 +86,27 @@ export const Rooms = () => {
 
 
     return (
-        <section className=" flex flex-col items-center justify-center">
-            <h2 className="my-6 [text-shadow:_2px_4px_3px_rgba(0,0,0,0.3)] text-5xl font-poppins">Rooms</h2>
+        <section className=" flex flex-col items-center justify-center mb-20">
+            <h1 className="my-6 font-bold text-5xl ">Rooms</h1>
             <div className="flex  flex-wrap items-center justify-center ">
                 {rooms &&
                     rooms.map((room, i) => {
+
+                        const uppercaseName = room.name.toUpperCase();
+
                         return (
-                            <CardDescription user_id={user_id} room_id={room.room_id} name={room.name} images={room.images} description={room.description} tv={room.tv} air_conditioning={room.air_conditioning} key={i} />
+                            <CardDescription user_id={user_id} room_id={room.room_id} name={uppercaseName} images={room.images} description={room.description} tv={room.tv} air_conditioning={room.air_conditioning} key={i} />
                         )
                     })
                 }
             </div>
             <hr className="border-gray-300 my-4 w-full" />
-            <h1 className='m-4'>or</h1>
+            <h1 className='m-0'>or</h1>
             {error && <Alert message={error} />}
             {check && <CheckMessage message={check} />}
-            <form onSubmit={handleSubmit} className="my-12 w-3/6 bg-white flex flex-col border rounded-2xl px-20 py-4 shadow-[rgba(0,0,0,0.1)0_4px_12px] gap-2">
+            <form onSubmit={handleSubmit} className="pb-12 my-8 w-3/6 bg-white flex flex-col border rounded-2xl px-20 shadow-[rgba(0,0,0,0.1)0_4px_12px] gap-2">
 
-                <h1 className="font-bold text-4xl p-4">Create and customize your room reservation!</h1>
+                <h1 className="m-2 font-bold text-4xl p-4">Create and customize your room reservation!</h1>
 
                 <div className="flex flex-col my-4 text-start">
                     <input required placeholder='Name'
@@ -154,7 +157,7 @@ export const Rooms = () => {
                 </div>
 
                 <div className="flex justify-center items-center flex-col">
-                    <button className="m-4 text-white mb-2 bg-[#006CE6] border rounded px-12 py-2 hover:bg-[#003B95]" type="submit">Create</button>
+                    <button className="m-4 text-white mb-2 bg-black border rounded px-12 py-2 hover:bg-[#003B95]" type="submit">Create Rooms</button>
                 </div>
             </form>
         </section>

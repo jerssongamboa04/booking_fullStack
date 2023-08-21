@@ -1,7 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}", "./node_modules/tw-elements/dist/js/**/*.js"
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./index.html",
+    "./node_modules/tw-elements-react/dist/js/**/*.js"
   ],
   theme: {
     extend: {
@@ -10,7 +13,7 @@ module.exports = {
       }
     },
   },
-  plugins: [require("tw-elements/dist/plugin.cjs")],
-  darkMode: "class",
+  plugins: [require("tw-elements-react/dist/plugin.cjs")],
+  darkMode: "class"
 }
 

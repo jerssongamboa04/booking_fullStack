@@ -2,11 +2,9 @@ import React, { useEffect, useState, useRef } from 'react';
 import { fetchData } from '../Utilies/Utilies';
 import { Link } from 'react-router-dom';
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
-import next from '../Static/next.png';
 
 
 const Slider = () => {
-    const [roomsData, setRoomsData] = useState([]);
     const [roomsMedia, setRoomsMedia] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const slideRef = useRef();
@@ -16,7 +14,6 @@ const Slider = () => {
             try {
                 const roomsData = await fetchData('http://localhost:8000/rooms');
                 const rooms = roomsData.result;
-                setRoomsData(rooms);
                 const media = rooms.map((room) => room.images);
                 setRoomsMedia(media);
             } catch (error) {
@@ -60,12 +57,12 @@ const Slider = () => {
     return (
         <section>
             {roomsMedia.length > 0 && (
-                <div ref={slideRef} className='w-full select-none relative p-2'>
+                <div ref={slideRef} className=' select-none relative p-2'>
                     <p className='text-lg font-semibold'>Best Rooms</p>
-                    <div className='aspect-w-16 aspect-h-9 flex justify-center items-center p-2'>
+                    <div className=' flex justify-center items-center p-2'>
                         <Link to='/rooms'>
                             <img
-                                className={`rounded-lg shadow-[rgba(0,0,0,0.1)0_4px_12px] ${slideRef.current && currentIndex === 0 ? 'fade-in' : 'fade-out'}`}
+                                className={`w-100 h-72 rounded-lg  object-cover shadow-[rgba(0,0,0,0.1)0_4px_12px] ${slideRef.current && currentIndex === 0 ? 'fade-in' : 'fade-out'}`}
                                 src={roomsMedia[currentIndex]}
                                 alt='img'
                             />

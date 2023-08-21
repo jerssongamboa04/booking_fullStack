@@ -1,7 +1,13 @@
-const fetchData = async (url) => {
-    const data = await fetch(url)
-    return data.json()
-}
+const fetchData = async (url, options = {}) => {
+    const response = await fetch(url, {
+        method: options.method || 'GET',
+        headers: options.headers || {},
+        body: options.body || null,
+    });
+
+    return response.json();
+};
+
 
 
 const promiseAll = async (array) => {

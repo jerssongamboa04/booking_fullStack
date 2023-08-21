@@ -10,6 +10,7 @@ import Footer from './Components/Footer';
 import Rooms from './Pages/Rooms';
 import User from './Pages/User';
 import Reservation from './Pages/Reservation';
+import ReservaId from './Components/ReservaId';
 
 
 function App() {
@@ -37,6 +38,12 @@ function App() {
               <ProtectedRoute>
                 <Reservation />
               </ProtectedRoute>} />
+
+              <Route path='/rooms/reservations/:id' element={
+              <ProtectedRoute>
+                <ReservaId/>
+              </ProtectedRoute>} />
+
 
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />

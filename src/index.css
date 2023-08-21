@@ -17,17 +17,38 @@
 }
 
 
+@layer base {
+  html {
+    @apply text-neutral-800;
+  }
+  html.dark {
+    @apply text-neutral-50;
+    @apply bg-neutral-800;
+  }
+}
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
+
+
+/* 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   padding-bottom: 24px;
   position: relative;
-  margin: 0 auto;
-  width: 1280px;
-  min-height: 100vh;
-  /* font-family: 'Poppins', sans-serif; */
+  /* margin: 0 auto; */
+  /* width: 1280px; */
+  /* min-height: 100vh;
+  font-family: 'Poppins', sans-serif; */ 
+
+
+
 }
 
 * img {

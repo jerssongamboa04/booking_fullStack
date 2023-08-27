@@ -10,7 +10,7 @@ const User = () => {
 
     useEffect(() => {
 
-        fetchData("http://localhost:8000/users")
+        fetchData("https://bookin-app-api.vercel.app/users")
             .then(async (res) => {
                 const data = await res.result;
                 if (data) {
@@ -26,7 +26,7 @@ const User = () => {
 
     const deleteUser = async (user_id) => {
         try {
-            const response = await fetchData(`http://localhost:8000/users/delete/${user_id}`, {
+            const response = await fetchData(`https://bookin-app-api.vercel.app/users/delete/${user_id}`, {
                 method: 'DELETE',
             });
 

@@ -17,7 +17,7 @@ export const Rooms = () => {
     useEffect(() => {
         const fetchRooms = async () => {
             try {
-                const roomsData = await fetchData('http://localhost:8000/rooms');
+                const roomsData = await fetchData('https://bookin-app-api.vercel.app/rooms');
                 const rooms = roomsData.result;
 
                 setRooms(rooms);
@@ -53,7 +53,7 @@ export const Rooms = () => {
         setError('');
         setCheck('');
         try {
-            const response = await fetch('http://localhost:8000/rooms', {
+            const response = await fetch('https://bookin-app-api.vercel.app/rooms', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

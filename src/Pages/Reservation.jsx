@@ -7,7 +7,7 @@ const Reservation = () => {
 
 
     useEffect(() => {
-        fetchData('http://localhost:8000/reservations')
+        fetchData('https://bookin-app-api.vercel.app/reservations')
             .then(async (res) => {
                 const data = await res.result;
                 if (data) {
@@ -31,7 +31,7 @@ const Reservation = () => {
    
     const deleteReservation = async (reservation_id) => {
         try {
-            const response = await fetchData(`http://localhost:8000/reservations/delete/${reservation_id}`, {
+            const response = await fetchData(`https://bookin-app-api.vercel.app/reservations/delete/${reservation_id}`, {
                 method: 'DELETE',
             });
 

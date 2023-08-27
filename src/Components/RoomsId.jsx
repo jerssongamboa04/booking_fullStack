@@ -11,7 +11,7 @@ const RoomsId = () => {
     useEffect(() => {
         const fetchRooms = async () => {
             try {
-                const roomsResponse = await fetchData(`http://localhost:8000/reservations/user/${user_id}`);
+                const roomsResponse = await fetchData(`https://bookin-app-api.vercel.app/reservations/user/${user_id}`);
                 if (roomsResponse && roomsResponse.result) {
                     const roomsData = roomsResponse.result;
                     setReservationsId(roomsData);
@@ -44,7 +44,7 @@ const RoomsId = () => {
     const deleteReservation = async (reservation_id) => {
         console.log(reservation_id);
         try {
-            const response = await fetchData(`http://localhost:8000/reservations/delete/${reservation_id}`, {
+            const response = await fetchData(`https://bookin-app-api.vercel.app/reservations/delete/${reservation_id}`, {
                 method: 'DELETE',
             });
 

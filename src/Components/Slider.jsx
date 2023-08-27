@@ -12,7 +12,7 @@ const Slider = () => {
     useEffect(() => {
         const fetchRooms = async () => {
             try {
-                const roomsData = await fetchData('http://localhost:8000/rooms');
+                const roomsData = await fetchData('https://bookin-app-api.vercel.app/rooms');
                 const rooms = roomsData.result;
                 const media = rooms.map((room) => room.images);
                 setRoomsMedia(media);

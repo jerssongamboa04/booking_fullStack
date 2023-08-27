@@ -1,3 +1,6 @@
+
+
+
 const fetchData = async (url, options = {}) => {
     const response = await fetch(url, {
         method: options.method || 'GET',

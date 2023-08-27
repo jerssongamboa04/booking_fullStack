@@ -25,7 +25,7 @@ const ReservaId = () => {
     useEffect(() => {
         const fetchRooms = async () => {
             try {
-                const roomsData = await fetchData(` http://localhost:8000/rooms/${id}`);
+                const roomsData = await fetchData(`https://bookin-app-api.vercel.app/rooms/${id}`);
                 const rooms = roomsData.result;
 
                 setRoomForId(rooms);
@@ -43,7 +43,7 @@ const ReservaId = () => {
         evento.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:8000/reservations', {
+            const response = await fetch('https://bookin-app-api.vercel.app/reservations', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

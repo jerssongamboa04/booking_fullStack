@@ -29,7 +29,7 @@ const Home = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const usersResponse = await fetchData("http://localhost:8000/users");
+                const usersResponse = await fetchData("https://bookin-app-api.vercel.app/users");
                 if (usersResponse && usersResponse.result) {
                     const usersData = usersResponse.result;
                     setUsersEmail(usersData);
@@ -55,7 +55,7 @@ const Home = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const usersResponse = await fetchData(`http://localhost:8000/users/${user_id}`);
+                const usersResponse = await fetchData(`https://bookin-app-api.vercel.app/users/${user_id}`);
                 if (usersResponse && usersResponse.result) {
                     const userData = usersResponse.result;
                     setUserData(userData[0]);

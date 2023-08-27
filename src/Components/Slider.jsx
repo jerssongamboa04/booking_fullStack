@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { fetchData } from '../Utilies/Utilies';
 import { Link } from 'react-router-dom';
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
@@ -25,15 +25,16 @@ const Slider = () => {
     }, []);
 
 
-    const handleOnNextClick = () => {
-        setCurrentIndex((prevIndex) => {
-            if (prevIndex === roomsMedia.length - 1) {
-                return 0; // Si es el último índice, volver al primero
-            } else {
-                return prevIndex + 1; // Incrementar el índice normalmente
-            }
-        });
-    };
+   
+  const handleOnNextClick = useCallback(() => {
+    setCurrentIndex((prevIndex) => {
+      if (prevIndex === roomsMedia.length - 1) {
+        return 0; // Si es el último índice, volver al primero
+      } else {
+        return prevIndex + 1; // Incrementar el índice normalmente
+      }
+    });
+  }, [roomsMedia.length]);
 
     const handleOnPrevClick = () => {
         setCurrentIndex((prevIndex) => {

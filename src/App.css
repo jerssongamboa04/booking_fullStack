@@ -7,11 +7,24 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media (max-width: 768px) {
+  body {
+    font-size: 14px; /* Reduce el tamaño de fuente en dispositivos móviles */
+  }
+  
+  .header {
+    padding: 10px; /* Reduce el padding en la cabecera para dispositivos móviles */
+  }
+  
+  .menu {
+    display: none; /* Oculta el menú en dispositivos móviles */
+  }
+  
+  .content {
+    width: 100%; /* Ajusta el ancho del contenido al 100% en dispositivos móviles */
   }
 }
+
 
 .App-header {
   background-color: #282c34;

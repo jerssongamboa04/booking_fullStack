@@ -77,14 +77,15 @@ const ReservaId = () => {
     return (
 
         <section className=" my-20">
-            {roomForId &&
+
+            {roomForId ? (
                 roomForId.map((room, i) => {
                     const uppercaseName = room.name.toUpperCase();
 
                     return (
                         <div key={i} className="flex m-4">
                             <div>
-                                <img className="w-full h-full object-cover rounded-lg" src={room.images} alt={room.name} />
+                                <img className="w-100 h-72  object-cover rounded-lg" src={room.images} alt={room.name} />
                             </div>
                             <div className="bg-blue-100">
                                 <h1 className="font-poppins font-bold text-2xl">{uppercaseName}</h1>
@@ -105,8 +106,13 @@ const ReservaId = () => {
 
                     )
                 })
-            }
-
+            ) : (<div className='m-6'>
+                <strong>Loading...</strong>
+                <div
+                    className="ml-auto inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                    role="status"></div>
+            </div>
+            )}
             <hr className="border-gray-300 my-6 w-full" />
 
             <section className="flex flex-col justify-center items-center">

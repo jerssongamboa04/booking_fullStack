@@ -34,7 +34,7 @@ const Register = () => {
             });
 
             if (response.ok) {
-                navigate('/');
+                navigate('/login');
             } else {
                 throw new Error('Error al registrarse');
             }

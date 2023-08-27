@@ -32,21 +32,21 @@ export const Rooms = () => {
 
     const handleChange = (event) => {
         const { name, value, type, checked } = event.target;
-      
+
         // Si el tipo de campo es checkbox, actualiza el estado con el valor booleano en lugar del texto
         if (type === 'checkbox') {
-          setNewRoom((prevRooms) => ({
-            ...prevRooms,
-            [name]: checked,
-          }));
+            setNewRoom((prevRooms) => ({
+                ...prevRooms,
+                [name]: checked,
+            }));
         } else {
-          // Si no es un checkbox, actualiza el estado normalmente con el valor del campo de texto
-          setNewRoom((prevRooms) => ({
-            ...prevRooms,
-            [name]: value,
-          }));
+            // Si no es un checkbox, actualiza el estado normalmente con el valor del campo de texto
+            setNewRoom((prevRooms) => ({
+                ...prevRooms,
+                [name]: value,
+            }));
         }
-      };
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -88,18 +88,26 @@ export const Rooms = () => {
     return (
         <section className=" flex flex-col items-center justify-center mb-20">
             <h1 className="my-6 font-bold text-5xl ">Rooms</h1>
-            <div className="flex  flex-wrap items-center justify-center ">
-                {rooms &&
-                    rooms.map((room, i) => {
+            {rooms ? (
+                <div className="flex  flex-wrap items-center justify-center ">
+                    {rooms &&
+                        rooms.map((room, i) => {
 
-                        const uppercaseName = room.name.toUpperCase();
+                            const uppercaseName = room.name.toUpperCase();
 
-                        return (
-                            <CardDescription user_id={user_id} room_id={room.room_id} name={uppercaseName} images={room.images} description={room.description} tv={room.tv} air_conditioning={room.air_conditioning} key={i} />
-                        )
-                    })
-                }
-            </div>
+                            return (
+                                <CardDescription user_id={user_id} room_id={room.room_id} name={uppercaseName} images={room.images} description={room.description} tv={room.tv} air_conditioning={room.air_conditioning} key={i} />
+                            )
+                        })
+                    }
+                </div>
+
+            ) : (<div className='m-6'>
+                <strong>Loading...</strong>
+                <div
+                    className="ml-auto inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                    role="status"></div>
+            </div>)}
             <hr className="border-gray-300 my-4 w-full" />
             <h1 className='m-0'>or</h1>
             {error && <Alert message={error} />}

@@ -55,8 +55,8 @@ const Slider = () => {
     };
 
     return (
-        <section>
-            {roomsMedia.length > 0 && (
+        <section> 
+            {roomsMedia.length > 0 ? (
                 <div ref={slideRef} className=' select-none relative p-2'>
                     <p className='text-lg font-semibold'>Best Rooms</p>
                     <div className=' flex justify-center items-center p-2'>
@@ -78,7 +78,13 @@ const Slider = () => {
                         </button>
                     </div>
                 </div>
-            )}
+            ) : (<div className='m-6'>
+                    <strong>Loading...</strong>
+                    <div
+                        className="ml-auto inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                        role="status"></div>
+                </div>
+                )}
         </section>
     );
 };

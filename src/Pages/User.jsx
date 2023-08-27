@@ -45,6 +45,7 @@ const User = () => {
     return (
         <section className='min-h-screen'>
             <h2 className="my-6 font-bold text-5xl">Users</h2>
+            {users ? ( 
             <div className="flex my-12 flex-wrap">
                 {users &&
                     users.map((users, i) => {
@@ -65,6 +66,12 @@ const User = () => {
                     })
                 }
             </div>
+            ) : (<div className='m-6'>
+            <strong>Loading...</strong>
+            <div
+                className="ml-auto inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                role="status"></div>
+        </div>)}
         </section>
     )
 }

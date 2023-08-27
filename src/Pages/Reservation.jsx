@@ -3,7 +3,7 @@ import { fetchData } from '../Utilies/Utilies';
 
 
 const Reservation = () => {
-    const [reservations, setReservations] = useState([]);
+    const [reservations, setReservations] = useState();
 
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const Reservation = () => {
         const minutes = date.getMinutes();
         return `Dia reserva ${day}/${month}/${year} Hora: ${hours}:${minutes}`;
     };
-   
+
     const deleteReservation = async (reservation_id) => {
         try {
             const response = await fetchData(`https://bookin-app-api.vercel.app/reservations/delete/${reservation_id}`, {
@@ -49,31 +49,36 @@ const Reservation = () => {
     return (
         <section className='flex flex-col min-h-screen'>
             <h1 className="my-6 font-bold text-5xl">Reservations</h1>
-            <div className="flex flex-wrap items-center justify-center">
-                {reservations.map((reservation, i) => {
-                    const formattedStartDate = formatDate(reservation.reservation_day);
+            {reservations ? (
+                <div className="flex flex-wrap items-center justify-center">
+                    {reservations.map((reservation, i) => {
+                        const formattedStartDate = formatDate(reservation.reservation_day);
 
-                    return (
-                        <div key={i} className=" text-center p-6 rounded-lg m-5 border-solid border-[1px] border-[#e3ded7] shadow-[rgba(0,0,0,0.1)0_4px_12px] transition ease-in-out delay-250 hover:shadow-[rgba(0,0,0,0.35)_0_5px_15px] hover:bg-slate-100">
-                            <h2 className='font-semibold'>Nº RESERVATION: </h2>
-                                    <h2 className="font-semibold w-full border-b-2 border-neutral-200 border-opacity-100 px-6 py-3 dark:border-opacity-50">{reservation.reservation_id}</h2>
-                                    <h2 className="font-semibold w-full border-b-2 border-neutral-200 border-opacity-100 px-6 py-3 dark:border-opacity-50">USER: {reservation.user_id}</h2>
-                                    <h2 className=" font-semibold w-full border-b-2 border-neutral-200 border-opacity-100 px-6 py-3 dark:border-opacity-50">ROOM: {reservation.room_id}</h2>
-                                   <div className=" font-semibold w-full border-b-2 border-neutral-200 border-opacity-100 px-6 py-3 dark:border-opacity-50">
+                        return (
+                            <div key={i} className=" text-center p-6 rounded-lg m-5 border-solid border-[1px] border-[#e3ded7] shadow-[rgba(0,0,0,0.1)0_4px_12px] transition ease-in-out delay-250 hover:shadow-[rgba(0,0,0,0.35)_0_5px_15px] hover:bg-slate-100">
+                                <h2 className='font-semibold'>Nº RESERVATION: </h2>
+                                <h2 className="font-semibold w-full border-b-2 border-neutral-200 border-opacity-100 px-6 py-3 dark:border-opacity-50">{reservation.reservation_id}</h2>
+                                <h2 className="font-semibold w-full border-b-2 border-neutral-200 border-opacity-100 px-6 py-3 dark:border-opacity-50">USER: {reservation.user_id}</h2>
+                                <h2 className=" font-semibold w-full border-b-2 border-neutral-200 border-opacity-100 px-6 py-3 dark:border-opacity-50">ROOM: {reservation.room_id}</h2>
+                                <div className=" font-semibold w-full border-b-2 border-neutral-200 border-opacity-100 px-6 py-3 dark:border-opacity-50">
                                     <h2>START DATE: {reservation.time_start}</h2>
                                     <h2>END DATE: {reservation.time_end}</h2>
-                                    </div>
-                                    <h2 className="w-full border-b-2 border-neutral-200 border-opacity-200 px-6 py-3 dark:border-opacity-50">{formattedStartDate}</h2>
+                                </div>
+                                <h2 className="w-full border-b-2 border-neutral-200 border-opacity-200 px-6 py-3 dark:border-opacity-50">{formattedStartDate}</h2>
 
-                                    <button onClick={() => deleteReservation(reservation.reservation_id)} className="m-2 border rounded px-12 py-2 hover:bg-[#003B95] hover:scale-105 transition ease-in-out delay-250 bg-[#006CE6] text-white" >
-                                        DELETE
-                                    </button>
+                                <button onClick={() => deleteReservation(reservation.reservation_id)} className="m-2 border rounded px-12 py-2 hover:bg-[#003B95] hover:scale-105 transition ease-in-out delay-250 bg-[#006CE6] text-white" >
+                                    DELETE
+                                </button>
 
-                        </div>
-                    );
-                })}
-            </div>
-           
+                            </div>
+                        );
+                    })}
+                </div>) : (<div className='m-6'>
+                    <strong>Loading...</strong>
+                    <div
+                        className="ml-auto inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                        role="status"></div>
+                </div>)}
         </section>
     );
 };

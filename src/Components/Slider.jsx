@@ -24,15 +24,6 @@ const Slider = () => {
         fetchRooms();
     }, []);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            handleOnNextClick();
-        }, 4000);
-
-        return () => {
-            clearInterval(interval);
-        };
-    }, [roomsMedia]);
 
     const handleOnNextClick = () => {
         setCurrentIndex((prevIndex) => {
@@ -53,6 +44,16 @@ const Slider = () => {
             }
         });
     };
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            handleOnNextClick();
+        }, 4000);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, [roomsMedia , handleOnNextClick]);
 
     return (
         <section> 

@@ -6,7 +6,7 @@ import Slider from '../Components/Slider';
 
 
 const Home = () => {
-    const { user, logout } = useContext(UserContext);
+    const {logout } = useContext(UserContext);
 
     const { user_id, setUser_id } = useContext(UserContext);
     const [emailLocal, setEmailLocal] = useState('');
@@ -50,7 +50,7 @@ const Home = () => {
         if (compareEmail) {
             setUser_id(compareEmail.user_id);
         }
-    }, [emailLocal, usersEmail]);
+    }, [emailLocal, usersEmail, setUser_id]);
 
     useEffect(() => {
         const fetchUser = async () => {

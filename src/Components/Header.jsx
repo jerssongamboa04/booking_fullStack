@@ -13,7 +13,7 @@ const Header = () => {
 
             <Link to={user ? '/' : '/login'}>
                 <div className="">
-                <h1 className="iphone m-0">M25 Space</h1>
+                <h1 className=" m-0">M25 Space</h1>
                 </div>
 
             </Link>

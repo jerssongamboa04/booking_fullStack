@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import "./Header.css"
 import Button from '../Components/Button';
 import { UserContext } from '../Context/AuthContext';
 import { Outlet } from 'react-router-dom';
@@ -6,10 +7,11 @@ import { Outlet } from 'react-router-dom';
 const Layout = () => {
   const { user } = useContext(UserContext); // Obtén el usuario del contexto
 
+  
   return (
     <div>
-      <nav>
-        <ul className='flex gap-8'>
+      <nav className=''>
+        <ul className='menu flex gap-8'>
           <li>
             <Button className="text-lg p-2 hover:rounded-xl hover:bg-[#006CE6] hover:px-2" url={'/reservation'} content={'Reservations'} />
           </li>
@@ -38,7 +40,7 @@ const Layout = () => {
               <li>
                 <Button className="text-lg p-2 hover:rounded-xl hover:bg-[#006CE6] hover:px-2" url={'/'} content={'My Home'} />
               </li>
-             
+
             </>
           )}
         </ul>

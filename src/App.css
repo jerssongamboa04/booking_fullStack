@@ -2,31 +2,9 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (max-width: 768px) {
-  body {
-    font-size: 14px; /* Reduce el tamaño de fuente en dispositivos móviles */
-  }
-  
-  .header {
-    padding: 10px; /* Reduce el padding en la cabecera para dispositivos móviles */
-  }
-  
-  .menu {
-    display: none; /* Oculta el menú en dispositivos móviles */
-  }
-  
-  .content {
-    width: 100%; /* Ajusta el ancho del contenido al 100% en dispositivos móviles */
-  }
-}
 
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -35,17 +13,6 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

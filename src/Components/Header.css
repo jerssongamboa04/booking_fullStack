@@ -1,8 +1,20 @@
-
 @media (max-width: 600px) {
     .menu {
-      position: relative;
-      display: block;
+        flex-direction: column;
+        /* Cambia la dirección a columna */
+        align-items: flex-start;
+        /* Alinea los elementos a la izquierda */
+        /* font-size: medium; */
+
     }
-  
-  }
+
+    .iphone {
+        /* font-size: medium; */
+    }
+
+    body {
+        width: 600px;
+
+    }
+
+}

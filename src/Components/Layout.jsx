@@ -10,7 +10,7 @@ const Layout = () => {
   
   return (
     <div>
-      <nav className=''>
+      <nav>
         <ul className='menu flex gap-8'>
           <li>
             <Button className="text-lg p-2 hover:rounded-xl hover:bg-[#006CE6] hover:px-2" url={'/reservation'} content={'Reservations'} />

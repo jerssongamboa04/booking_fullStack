@@ -16,6 +16,7 @@ const Home = () => {
 
 
     const handlelogout = async () => {
+        sessionStorage.removeItem('emailUser');
         await logout()
     }
 
